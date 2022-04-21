@@ -1,3 +1,4 @@
 # ignore runs - this is where tensorboard stuff is stored, we don't need to save atm
 runs/
 run*/
+checkpoint*
