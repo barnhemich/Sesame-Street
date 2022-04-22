@@ -28,14 +28,19 @@ import gzip
 import io
 import json
 from tqdm import tqdm
+import re
 
 
 # process single batch
 def process_batch(batch: dict):
     # this downloads both the metadata & full text files for a particular shard
+    print(batch['input_metadata_path'])
+    print(batch['input_metadata_url'])
     cmd = ["wget", "-O", batch['input_metadata_path'], batch['input_metadata_url']]
     subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
 
+    print(batch['input_pdf_parses_path'])
+    print(batch['input_pdf_parses_url'])
     cmd = ["wget", "-O", batch['input_pdf_parses_path'], batch['input_pdf_parses_url']]
     subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
 
@@ -48,7 +53,7 @@ def process_batch(batch: dict):
             metadata_dict = json.loads(line)
             paper_id = metadata_dict['paper_id']
             mag_field_of_study = metadata_dict['mag_field_of_study']
-            if mag_field_of_study and 'Medicine' in mag_field_of_study:     # TODO: <<< change this to your filter
+            if mag_field_of_study and 'Computer Science' in mag_field_of_study:     # TODO: <<< change this to your filter
                 paper_ids_to_keep.add(paper_id)
                 f_out.write(line)
 
@@ -68,10 +73,10 @@ def process_batch(batch: dict):
 
 if __name__ == '__main__':
 
-    METADATA_INPUT_DIR = 'metadata/raw/'
-    METADATA_OUTPUT_DIR = 'metadata/medicine/'
-    PDF_PARSES_INPUT_DIR = 'pdf_parses/raw/'
-    PDF_PARSES_OUTPUT_DIR = 'pdf_parses/medicine/'
+    METADATA_INPUT_DIR = 'F:/cs2/metadata/raw/'
+    METADATA_OUTPUT_DIR = 'F:/cs2/metadata/cs/'
+    PDF_PARSES_INPUT_DIR = 'F:/cs2/pdf_parses/raw/'
+    PDF_PARSES_OUTPUT_DIR = 'F:/cs2/pdf_parses/cs/'
 
     os.makedirs(METADATA_INPUT_DIR, exist_ok=True)
     os.makedirs(METADATA_OUTPUT_DIR, exist_ok=True)
@@ -80,11 +85,31 @@ if __name__ == '__main__':
 
     # TODO: make sure to put the links we sent to you here
     # there are 100 shards with IDs 0 to 99. make sure these are paired correctly.
-    download_linkss = [
-        {"metadata": "https://...", "pdf_parses": "https://..."},  # for shard 0
-        {"metadata": "https://...", "pdf_parses": "https://..."},  # for shard 1
-        {"metadata": "https://...", "pdf_parses": "https://..."},  # for shard 2
-    ]
+    # download_linkss = [
+    #     {"metadata": "https://...", "pdf_parses": "https://..."},  # for shard 0
+    #     {"metadata": "https://...", "pdf_parses": "https://..."},  # for shard 1
+    #     {"metadata": "https://...", "pdf_parses": "https://..."},  # for shard 2
+    # ]
+    # download_linkss = [
+    #     {"metadata": "https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_0.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=uPfuXHEVYI39hwwibohK1CcK5Q0%3D&Expires=1654817320", "pdf_parses": "https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_0.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=tM6gFLX%2BKuMv0R2jkA%2FWB8Ht0qM%3D&Expires=1654817323"},  # for shard 0
+    # ]
+    # download_linkss = []
+    # for i in range(100):
+    #     download_linkss.append({"metadata": f"https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_{i}.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=uPfuXHEVYI39hwwibohK1CcK5Q0%3D&Expires=1654817320", "pdf_parses": f"https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_{i}.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=tM6gFLX%2BKuMv0R2jkA%2FWB8Ht0qM%3D&Expires=1654817323"})
+
+    md = []
+    pdf = []
+    with open("dl_s2orc_20200705v1_full_urls_expires_20220609.txt") as f:
+        for line in f:
+            if "metadata/metadata_" in line:
+                link = re.search("https.+$", line)
+                md.append(link[0][:-1])
+            elif "pdf_parses/pdf_parses_" in line:
+                link = re.search("https.+$", line)
+                pdf.append(link[0][:-1])
+    download_linkss = []
+    for i, j in zip(md, pdf):
+        download_linkss.append({"metadata": i, "pdf_parses": j})
 
     # turn these into batches of work
     # TODO: feel free to come up with your own naming convention for 'input_{metadata|pdf_parses}_path'
