@@ -77,6 +77,7 @@ of unrelated data can provide significant performance improvements. After pretra
 smaller task-specific dataset. Using the small labeled taskspecific dataset for additional pretraining has further increased model performance. Similarly, adding a pretraining step that uses unlabeled data from the same domain
 as the task-specific data can provide benefits. However,
 this process can be computationally expensive and inefficient due to the large number of parameters in the model.
+
 It has been demonstrated that the parameter space can be
 significantly decreased with minimal performance sacrifice
 through the use of adapter modules for the final fine-tuning
@@ -108,9 +109,15 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
+
+**NOTE**: This code assumes that you have a cuda enabled GPU.
+* python
   ```sh
-  npm install npm@latest -g
+  conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
+  pip install -U adapter-transformers
+  conda install -y -c conda-forge tensorboard
+  pip install optuna
+  pip install tqdm
   ```
 
 ### Installation
@@ -123,16 +130,6 @@ This is an example of how to list things you need to use the software and how to
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -150,7 +147,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@](https://twitter.com/) - email@gmail.com
+Michael Barnhart  - barnhemich@gmail.com
 
 Project Link: [https://github.com/barnhemich/Sesame-Street](https://github.com/barnhemich/Sesame-Street)
 
@@ -160,10 +157,10 @@ Project Link: [https://github.com/barnhemich/Sesame-Street](https://github.com/b
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-
-* []()
-* []()
-* []()
+Team that help accomplish this.
+* [nsusemiehl](https://github.com/nsusemiehl)
+* [tonyjnel](https://github.com/tonyjnel)
+* [ethanchen91](https://github.com/ethanchen91)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
