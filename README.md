@@ -37,7 +37,41 @@
 <h3 align="center">Domain and Task Pretraining for Transformer Adapters</h3>
 
   <p align="center">
-    When labeled training data for a specific NLP task is
+    Testing the the efficacy of using Domain and Task pretraining on Transformer adapters to improve performance of NLP tasks.
+    <br />
+    <a href="https://github.com/barnhemich/Sesame-Street/blob/main/Project_Report__Final.pdf"><strong>Read Our Findings »</strong></a>
+    <br />
+    <br />
+  </p>
+</div>
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+When labeled training data for a specific NLP task is
 limited, pretraining a language model on a large corpus
 of unrelated data can provide significant performance improvements. After pretraining on the unrelated but abundant dataset, the model can then be fine-tuned using the
 smaller task-specific dataset. Using the small labeled taskspecific dataset for additional pretraining has further increased model performance. Similarly, adding a pretraining step that uses unlabeled data from the same domain
@@ -55,47 +89,6 @@ and DAPT. We find that finetuning using adapters outperforms conventional finetu
 that TAPT and DAPT are less effective when pretraining
 adapters only compared to when they are applied to the full
 model.
-    <br />
-    <a href="https://github.com/barnhemich/Sesame-Street/blob/main/Project_Report__Final.pdf"><strong>Read Our Findings »</strong></a>
-    <br />
-    <br />
-  </p>
-</div>
-
-
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -187,7 +180,7 @@ Project Link: [https://github.com/barnhemich/Sesame-Street](https://github.com/b
 [issues-shield]: https://img.shields.io/github/issues/barnhemich/Sesame-Street.svg?style=for-the-badge
 [issues-url]: https://github.com/barnhemich/Sesame-Street/issues
 [license-shield]: https://img.shields.io/github/license/barnhemich/Sesame-Street.svg?style=for-the-badge
-[license-url]: https://github.com/barnhemich/Sesame-Street/blob/master/LICENSE.txt
+[license-url]: https://github.com/barnhemich/Sesame-Street/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/https://www.linkedin.com/in/michael-barnhart-973059171/
 [product-screenshot]: images/screenshot.png
